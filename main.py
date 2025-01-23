@@ -5,8 +5,14 @@ def main():
     print(f"--- Begin report of {path} ---")
     print(f"{count_words(file_contents)}  words found in the document\n")
     my_dict = count_char(file_contents)
-    for letter in my_dict:
-        print(f"The '{letter}' character was found {my_dict[letter]} times")
+
+    del my_dict[' ']
+    del my_dict['.']
+    del my_dict['#']
+    sorted_items = sorted(my_dict.items(), key = lambda item: item[1], reverse=True)
+
+    for tuple in sorted_items:
+        print(f"The '{tuple[0]}' character was found {tuple[1]} times")
 
 
 def count_words(val):
@@ -24,5 +30,6 @@ def count_char(val):
 
 def sort_on(dict):
     return dict["num"]
+
 
 main()
